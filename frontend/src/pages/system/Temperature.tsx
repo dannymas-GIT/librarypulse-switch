@@ -10,6 +10,14 @@ const Temperature: React.FC = () => {
     queryFn: fetchSwitchMetrics
   });
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="text-lg">Loading temperature data...</div>
+      </div>
+    );
+  }
+
   // Mock temperature data - in a real application, this would come from the API
   const temperatureData = {
     current: 42,

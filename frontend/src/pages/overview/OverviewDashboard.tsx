@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchSwitchMetrics } from '../../services/api';
 
 const OverviewDashboard: React.FC = () => {
-  const { data: metrics, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ['switchMetrics'],
     queryFn: fetchSwitchMetrics
   });
@@ -92,7 +92,7 @@ const OverviewDashboard: React.FC = () => {
         <Card className="p-6">
           <h2 className="text-lg font-medium mb-4">Network Traffic Overview</h2>
           <LineChart
-            data={metrics?.trafficStats.map(stat => ({
+            data={data?.trafficStats.map(stat => ({
               timestamp: stat.timestamp,
               ingress: stat.ingressTraffic,
               egress: stat.egressTraffic
@@ -105,7 +105,7 @@ const OverviewDashboard: React.FC = () => {
           <Card className="p-6">
             <h2 className="text-lg font-medium mb-4">Top Active Ports</h2>
             <div className="space-y-4">
-              {metrics?.portUtilization.slice(0, 5).map((port, index) => (
+              {data?.portUtilization.slice(0, 5).map((port, index) => (
                 <div key={index} className="flex items-center justify-between">
                   <span className="text-sm font-medium">Port {port.portId}</span>
                   <div className="flex-1 mx-4">

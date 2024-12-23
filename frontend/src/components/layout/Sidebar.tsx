@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { 
   Network, 
+  AlertCircle, 
+  Boxes,
   Activity, 
   Cpu, 
-  AlertCircle, 
-  Settings,
-  Boxes,
-  Radio
+  Settings
 } from 'lucide-react';
 
 interface NavigationItem {

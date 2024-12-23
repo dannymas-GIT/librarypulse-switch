@@ -4,12 +4,28 @@ import { LineChart } from '../../components/charts/LineChart';
 import { DataTable } from '../../components/ui/DataTable';
 import { useQuery } from '@tanstack/react-query';
 import { fetchSwitchMetrics } from '../../services/api';
+import type { Column } from '../../types/table';
+
+interface TopPort {
+  port: string;
+  ingress: string;
+  egress: string;
+  utilization: string;
+}
 
 const TrafficAnalysis: React.FC = () => {
   const { data: metrics, isLoading } = useQuery({
     queryKey: ['switchMetrics'],
     queryFn: fetchSwitchMetrics
   });
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="text-lg">Loading traffic analysis...</div>
+      </div>
+    );
+  }
 
   // Mock traffic data
   const trafficStats = {
@@ -25,6 +41,27 @@ const TrafficAnalysis: React.FC = () => {
       { port: 'GE1/0/5', ingress: '65 Gbps', egress: '58 Gbps', utilization: '50%' },
     ]
   };
+
+  const columns: Column<TopPort>[] = [
+    { header: 'Port', accessorKey: 'port' },
+    { header: 'Ingress', accessorKey: 'ingress' },
+    { header: 'Egress', accessorKey: 'egress' },
+    {
+      header: 'Utilization',
+      accessorKey: 'utilization',
+      cell: ({ row }) => (
+        <div className="flex items-center">
+          <span className="mr-2">{row.original.utilization}</span>
+          <div className="flex-1 h-2 bg-gray-200 rounded-full">
+            <div
+              className="h-2 bg-blue-500 rounded-full"
+              style={{ width: row.original.utilization }}
+            ></div>
+          </div>
+        </div>
+      )
+    }
+  ];
 
   return (
     <div className="space-y-6">
@@ -74,26 +111,7 @@ const TrafficAnalysis: React.FC = () => {
         <Card className="p-6">
           <h2 className="text-lg font-medium mb-4">Top Ports by Traffic</h2>
           <DataTable
-            columns={[
-              { header: 'Port', accessorKey: 'port' },
-              { header: 'Ingress', accessorKey: 'ingress' },
-              { header: 'Egress', accessorKey: 'egress' },
-              { 
-                header: 'Utilization', 
-                accessorKey: 'utilization',
-                cell: (row: any) => (
-                  <div className="flex items-center">
-                    <span className="mr-2">{row.utilization}</span>
-                    <div className="flex-1 h-2 bg-gray-200 rounded-full">
-                      <div
-                        className="h-2 bg-blue-500 rounded-full"
-                        style={{ width: row.utilization }}
-                      ></div>
-                    </div>
-                  </div>
-                )
-              },
-            ]}
+            columns={columns}
             data={trafficStats.topPorts}
           />
         </Card>

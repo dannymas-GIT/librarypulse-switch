@@ -10,6 +10,14 @@ const LatencyMetrics: React.FC = () => {
     queryFn: fetchSwitchMetrics
   });
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="text-lg">Loading latency metrics...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold text-gray-900">Latency Metrics</h1>

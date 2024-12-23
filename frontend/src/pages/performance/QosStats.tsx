@@ -11,6 +11,14 @@ const QosStats: React.FC = () => {
     queryFn: fetchSwitchMetrics
   });
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="text-lg">Loading QoS statistics...</div>
+      </div>
+    );
+  }
+
   // Mock QoS data - in a real application, this would come from the API
   const qosData = [
     { priority: 'High', class: 'Voice', bandwidth: '20%', latency: '< 10ms', packetLoss: '< 0.1%' },

@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   Network, 
   Activity, 
   Cpu, 
   AlertCircle, 
   Boxes,
-  Radio,
   ChevronDown
 } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
 
 interface NavigationItem {
   label: string;
