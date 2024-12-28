@@ -1,70 +1,64 @@
-# Dependencies
-node_modules/
-/.pnp
-.pnp.js
-
-# Testing
-/coverage
-
-# Production
-/build
-/dist
-
-# Development
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-logs
-*.log
-
-# Editor directories and files
-.idea/
-.vscode/
-*.swp
-*.swo
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-# TypeScript
-*.tsbuildinfo
-
-# Vite
-.vite/
-
-# Environment variables
+# Environment and Configuration Files
 .env
 .env.*
 !.env.example
+*.conf
+!*.template.conf
+docker-compose.yml
+!docker-compose.template.yml
 
-# System Files
+# Dependencies
+node_modules/
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+dist/
+build/
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs and Databases
+*.log
+logs/
+*.sqlite3
+*.db
+
+# Certificates and Keys
+*.pem
+*.key
+*.crt
+*.cert
+*.der
+
+# Build and Cache
+.cache/
+.npm/
+.eslintcache
+.pytest_cache/
+coverage/
+.coverage
+htmlcov/
+
+# OS Files
 .DS_Store
 Thumbs.db
 
-# Debug
-.debug/
-
-# Temporary files
+# Temporary Files
 *.tmp
 *.temp
+*.bak
 
-# Screenshots and media files
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.ico
-*.svg
-
-# Build output
-dist-ssr
+# Development Files
 *.local
+local_settings.py
+development.env
+
+# Docker
+.docker/
+docker-compose.override.yml
