@@ -24,7 +24,7 @@ const queryClient = new QueryClient();
 const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
+      <Router basename="/app/switch">
         <DashboardLayout>
           <Routes>
             <Route path="/" element={<OverviewDashboard />} />
